@@ -3,12 +3,14 @@ package com.tedredington.AdyenNotifications.service;
 import com.adyen.model.Amount;
 import com.adyen.model.notification.NotificationRequest;
 import com.adyen.model.notification.NotificationRequestItem;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Async
 @Service
 public class NotificationService {
 
