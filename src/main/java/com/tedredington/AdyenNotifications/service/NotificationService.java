@@ -3,7 +3,6 @@ package com.tedredington.AdyenNotifications.service;
 import com.adyen.model.Amount;
 import com.adyen.model.notification.NotificationRequest;
 import com.adyen.model.notification.NotificationRequestItem;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -54,7 +53,9 @@ public class NotificationService {
             String cardBin = additionalData.get("cardBin");
             String totalFraudScore = additionalData.get("totalFraudScore");
 
-            // String operations = item.getOperations().toString();
+            if (success.equals("false")) {
+                String operations = item.getOperations().toString();
+            }
 
             System.out.println(item);
 
