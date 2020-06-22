@@ -22,7 +22,7 @@ public class NotificationController {
         return ResponseEntity.ok("[accepted]");
     }
 
-    @GetMapping(value="/notifications", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/notifications")
     public ResponseEntity<String> getNotifications (@RequestBody NotificationRequest notificationRequest) {
 
         notificationService.save(notificationRequest);
