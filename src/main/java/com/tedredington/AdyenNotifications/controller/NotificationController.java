@@ -23,9 +23,7 @@ public class NotificationController {
     }
 
     @GetMapping(value="/notifications")
-    public ResponseEntity<String> getNotifications (@RequestBody NotificationRequest notificationRequest) {
-
-        notificationService.save(notificationRequest);
+    public ResponseEntity<String> getNotifications () {
 
         return ResponseEntity.ok("OK");
     }
