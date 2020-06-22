@@ -55,7 +55,7 @@ public class NotificationService {
             String cardBin = additionalData.get("cardBin");
             String totalFraudScore = additionalData.get("totalFraudScore");
 
-            if (success.equals("false")) {
+            if (success.equals("true")) {
                 String operations = item.getOperations().toString();
             }
 
