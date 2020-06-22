@@ -15,11 +15,19 @@ public class NotificationController {
     NotificationService notificationService;
 
     @PostMapping(value="/notifications", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> Notifications(@RequestBody NotificationRequest notificationRequest) {
+    public ResponseEntity<String> postNotifications(@RequestBody NotificationRequest notificationRequest) {
 
         notificationService.save(notificationRequest);
 
         return ResponseEntity.ok("[accepted]");
+    }
+
+    @GetMapping(value="/notifications", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getNotifications (@RequestBody NotificationRequest notificationRequest) {
+
+        notificationService.save(notificationRequest);
+
+        return ResponseEntity.ok("OK");
     }
 
     public NotificationController( NotificationService notificationService) {
