@@ -1,6 +1,5 @@
 package com.tedredington.AdyenNotifications.controller;
 
-import com.adyen.model.notification.NotificationRequest;
 import com.tedredington.AdyenNotifications.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
