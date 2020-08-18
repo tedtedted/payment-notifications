@@ -32,6 +32,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
 			<groupId>com.adyen</groupId>
 			<artifactId>adyen-java-api-library</artifactId>
 			<version>6.1.0</version>
