@@ -1,43 +1,35 @@
 package com.tedredington.AdyenNotifications.controller;
 
-import com.adyen.model.notification.NotificationRequest;
+import com.tedredington.AdyenNotifications.domain.Notification;
 import com.tedredington.AdyenNotifications.service.NotificationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.*;
+import io.micronaut.views.View;
 
-@RestController
-@RequestMapping("/adyen")
+@Controller("/adyen/notifications")
 public class NotificationController {
 
-    @Autowired
-    NotificationService notificationService;
+    private final NotificationService notificationService;
 
-    @PostMapping(value="/notifications", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> postNotifications(@RequestBody NotificationRequest notificationRequest) {
-
-        notificationService.save(notificationRequest);
-
-        return ResponseEntity.ok("[accepted]");
-    }
-
-    @GetMapping(value="/notifications")
-    public ResponseEntity<String> getNotifications () {
-
-        return ResponseEntity.ok("OK");
-    }
-
-    public NotificationController( NotificationService notificationService) {
+    public NotificationController(NotificationService notificationService) {
         this.notificationService = notificationService;
     }
 
-    @PostMapping(value="/error", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> postBadNotification(@RequestBody NotificationRequest notificationRequest) {
 
-        // notificationService.save(notificationRequest);
+    @Post
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public HttpResponse postNotification(@Body Notification notification){
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("faking a bad request");
+        notificationService.save(notification);
+        return HttpResponse.ok("[accepted]");
+    }
+
+
+    @Get
+    @View("index")
+    public HttpResponse index() {
+        return HttpResponse.ok();
     }
 }
