@@ -11,7 +11,9 @@ import java.util.List;
 @Service
 public class NotificationService {
 
+
     String hmacKey = "b0ea55c2fe60d4d1d605e9c385e0e7";
+
 
     public void save(NotificationRequest notificationRequest) throws SignatureException {
 
@@ -31,6 +33,7 @@ public class NotificationService {
             } else {
                 System.out.println("No Hmac, moving on anyway");
             }
+
         }
     }
 
