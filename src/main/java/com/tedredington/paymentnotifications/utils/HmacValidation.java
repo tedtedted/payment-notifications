@@ -25,8 +25,6 @@ public class HmacValidation {
                  hmacSignature = null;
             }
 
-            System.out.println("HMAC SIGNATURE " + hmacSignature);
-
             if (hmacSignature != null) {
                 if (isHmacValid(notificationRequestItem, hmacSignature)) {
                     return HmacStatus.VALID;
