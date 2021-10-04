@@ -27,15 +27,19 @@ public class HmacValidation {
 
             System.out.println("HMAC SIGNATURE " + hmacSignature);
 
-            if (hmacSignature != null ) {
+            if (hmacSignature != null) {
                 if (isHmacValid(notificationRequestItem, hmacSignature)) {
                     return HmacStatus.VALID;
                 } else {
                     return HmacStatus.NOT_VALID;
                 }
             }
+
+            if (hmacSignature == null || hmacSignature.isBlank()) {
+                return HmacStatus.MISSING;
+            }
         }
-        return HmacStatus.MISSING;
+        return HmacStatus.UNKNOWN;
     }
 
     public static boolean isHmacValid(NotificationRequestItem notificationRequestItem, String hmacSignature) {
