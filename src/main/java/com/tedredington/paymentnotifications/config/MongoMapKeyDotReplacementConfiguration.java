@@ -9,6 +9,6 @@ public class MongoMapKeyDotReplacementConfiguration {
 
     @Autowired
     public void setMapKeyDotReplacement(MappingMongoConverter mongoConverter) {
-        mongoConverter.setMapKeyDotReplacement("#");
+        mongoConverter.setMapKeyDotReplacement("");
     }
 }
