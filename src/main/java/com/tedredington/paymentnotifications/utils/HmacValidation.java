@@ -17,9 +17,17 @@ public class HmacValidation {
         // Iterate through NotificationItems array ( there's not expected to be multiple )
         for (NotificationRequestItem notificationRequestItem : notificationRequestItems) {
 
-            String hmacSignature = notificationRequestItem.getAdditionalData().get("hmacSignature");
+            String hmacSignature;
 
-            if (hmacSignature != null) {
+            try {
+                 hmacSignature = notificationRequestItem.getAdditionalData().get("hmacSignature");
+            } catch (NullPointerException e){
+                 hmacSignature = null;
+            }
+
+            System.out.println("HMAC SIGNATURE " + hmacSignature);
+
+            if (hmacSignature != null ) {
                 if (isHmacValid(notificationRequestItem, hmacSignature)) {
                     return HmacStatus.VALID;
                 } else {
