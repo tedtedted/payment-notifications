@@ -25,7 +25,7 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    @PostMapping("/events")
+    @PostMapping("events")
     public ResponseEntity postNotification(@RequestBody NotificationRequest notification) {
 
         try {

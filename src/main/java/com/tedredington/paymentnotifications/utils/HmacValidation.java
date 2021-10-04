@@ -32,6 +32,7 @@ public class HmacValidation {
 
     public static boolean isHmacValid(NotificationRequestItem notificationRequestItem, String hmacSignature) {
 
+        // Fake HMAC from Adyen docs
         String hmacKey = "b0ea55c2fe60d4d1d605e9c385e0e7";
 
         HMACValidator hmacValidator = new HMACValidator();

@@ -19,9 +19,6 @@ public class NotificationService {
 
     Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
-    // Fake HMAC from the Adyen docs
-    String hmacKey = "b0ea55c2fe60d4d1d605e9c385e0e7";
-
     public void save(NotificationRequest notificationRequest) throws SignatureException {
 
         HmacStatus status = HmacValidation.validateHmac(notificationRequest);
@@ -34,7 +31,7 @@ public class NotificationService {
         if (status.equals(HmacStatus.NOT_VALID)) {
             logger.info("HMAC Status: " + status + ". Not Moving Forward with Sending");
         } else {
-            logger.info("HMAC Status: " + status + ". Moving Forward with Sending to Queue");
+            logger.info("HMAC Status: " + status + ". Moving Forward with Sending");
             notificationItemRepo.save(notificationRequest);
 
         }
