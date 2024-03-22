@@ -1,9 +1,9 @@
-package com.tedredington.paymentnotifications.utils;
+package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.adyen.model.notification.NotificationRequestItem;
 import com.adyen.util.HMACValidator;
-import com.tedredington.paymentnotifications.domain.HmacStatus;
+import com.tedredington.paymentnotifications.HmacStatus;
 
 import java.security.SignatureException;
 import java.util.List;

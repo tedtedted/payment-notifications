@@ -1,4 +1,4 @@
-package com.tedredington.paymentnotifications.domain;
+package com.tedredington.paymentnotifications;
 
 public enum EventTypes {
 

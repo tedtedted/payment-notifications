@@ -1,4 +1,4 @@
-package com.tedredington.paymentnotifications.repo;
+package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;

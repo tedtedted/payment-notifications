@@ -1,17 +1,13 @@
-package com.tedredington.paymentnotifications.controller;
+package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
-import com.tedredington.paymentnotifications.domain.EventTypes;
-import com.tedredington.paymentnotifications.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.SignatureException;
-import java.util.Locale;
 
 @RestController()
 @RequestMapping("adyen")

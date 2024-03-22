@@ -1,9 +1,6 @@
-package com.tedredington.paymentnotifications.service;
+package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
-import com.tedredington.paymentnotifications.domain.HmacStatus;
-import com.tedredington.paymentnotifications.repo.NotificationRepository;
-import com.tedredington.paymentnotifications.utils.HmacValidation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
