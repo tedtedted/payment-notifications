@@ -1,4 +1,4 @@
-package com.tedredington.paymentnotifications;
+package com.tedredington.paymentnotifications.adyen;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.adyen.model.notification.NotificationRequestItem;

@@ -2,6 +2,8 @@ package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tedredington.paymentnotifications.adyen.NotificationRepository;
+import com.tedredington.paymentnotifications.adyen.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.io.IOException;
 import java.security.SignatureException;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
