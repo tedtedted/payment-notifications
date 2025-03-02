@@ -1,6 +1,5 @@
-package com.tedredington.paymentnotifications;
+package com.tedredington.paymentnotifications.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 

@@ -1,4 +1,4 @@
-package com.tedredington.paymentnotifications;
+package com.tedredington.paymentnotifications.adyen;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.adyen.model.notification.NotificationRequestItem;
@@ -11,13 +11,13 @@ import java.security.SignatureException;
 import java.util.List;
 
 @Service
-public class NotificationService {
+public class AdyenWebhookService {
 
-    Logger logger = LoggerFactory.getLogger(NotificationService.class);
+    Logger logger = LoggerFactory.getLogger(AdyenWebhookService.class);
 
-    private final NotificationRepository notificationItemRepository;
+    private final AdyenWebhookRepository notificationItemRepository;
 
-    public NotificationService(NotificationRepository notificationItemRepository) {
+    public AdyenWebhookService(AdyenWebhookRepository notificationItemRepository) {
         this.notificationItemRepository = notificationItemRepository;
     }
 

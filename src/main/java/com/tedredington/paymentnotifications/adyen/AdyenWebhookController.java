@@ -1,4 +1,4 @@
-package com.tedredington.paymentnotifications;
+package com.tedredington.paymentnotifications.adyen;
 
 import com.adyen.model.notification.NotificationRequest;
 import org.slf4j.Logger;
@@ -11,21 +11,21 @@ import java.security.SignatureException;
 
 @RestController()
 @RequestMapping("adyen")
-public class NotificationController {
+public class AdyenWebhookController {
 
-    Logger logger = LoggerFactory.getLogger(NotificationController.class);
+    Logger logger = LoggerFactory.getLogger(AdyenWebhookController.class);
 
-    private final NotificationService notificationService;
+    private final AdyenWebhookService adyenWebhookService;
 
-    public NotificationController(NotificationService notificationService) {
-        this.notificationService = notificationService;
+    public AdyenWebhookController(AdyenWebhookService adyenWebhookService) {
+        this.adyenWebhookService = adyenWebhookService;
     }
 
     @PostMapping("events")
     public ResponseEntity postNotification(@RequestBody NotificationRequest notification) {
 
         try {
-            notificationService.save(notification);
+            adyenWebhookService.save(notification);
             return ResponseEntity.ok("[accepted]");
         } catch (SignatureException e) {
             logger.warn("ERROR: " + e.getLocalizedMessage());
