@@ -2,8 +2,6 @@ package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tedredington.paymentnotifications.adyen.AdyenWebhookRepository;
-import com.tedredington.paymentnotifications.adyen.AdyenWebhookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
