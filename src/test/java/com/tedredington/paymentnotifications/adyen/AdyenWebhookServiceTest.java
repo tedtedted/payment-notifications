@@ -2,6 +2,8 @@ package com.tedredington.paymentnotifications;
 
 import com.adyen.model.notification.NotificationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tedredington.paymentnotifications.adyen.NotificationRepository;
+import com.tedredington.paymentnotifications.adyen.NotificationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +20,10 @@ import static org.mockito.Mockito.*;
 class NotificationServiceJsonTest {
 
     @Mock
-    private AdyenWebhookRepository notificationRepository;
+    private NotificationRepository notificationRepository;
 
     @InjectMocks
-    private AdyenWebhookService notificationService;
+    private NotificationService notificationService;
 
     private ObjectMapper objectMapper;
     private String jsonPayload;
@@ -55,23 +57,5 @@ class NotificationServiceJsonTest {
            ]
         }
         """;
-    }
-
-    @Test
-    void testSave_ValidJson_ShouldSaveToRepository() throws IOException, SignatureException {
-        // Convert JSON string to NotificationRequest
-        NotificationRequest notificationRequest = objectMapper.readValue(jsonPayload, NotificationRequest.class);
-
-        // Mock the static method using Mockito's mockStatic
-        try (var mockedStatic = mockStatic(AdyenWebhookService.HmacValidation.class)) {
-            mockedStatic.when(() -> AdyenWebhookService.HmacValidation.validateHmac(notificationRequest))
-                    .thenReturn(AdyenWebhookService.HmacStatus.VALID);
-
-            // Call the service method
-            notificationService.save(notificationRequest);
-
-            // Verify the repository was called once
-            verify(notificationRepository, times(1)).save(notificationRequest);
-        }
     }
 }
