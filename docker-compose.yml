@@ -1,10 +1,30 @@
-version: "3.8"
-
+---
 services:
   payment-notifications:
     image: tedtedted/payment-notifications:latest
     container_name: payment-notifications
     expose:
       - "8081"
+    networks:
+      - internal
     env_file:
       - .env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:8
+    container_name: notify-mongo
+    networks:
+      - internal
+    volumes:
+      - notify_mongo_data_vol:/data/db
+    env_file:
+      - .env
+
+volumes:
+  notify_mongo_data_vol:
+
+networks:
+  internal:
+    internal: true
