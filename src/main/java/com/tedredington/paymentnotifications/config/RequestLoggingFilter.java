@@ -1,5 +1,6 @@
 package com.tedredington.paymentnotifications.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,8 @@ import java.util.stream.Collectors;
 public class RequestLoggingFilter extends OncePerRequestFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestLoggingFilter.class);
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -36,7 +39,7 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
 
             String headers = Collections.list(wrappedRequest.getHeaderNames())
                     .stream()
-                    .collect(Collectors.toMap(name -> name, wrappedRequest::getHeader, (a,b) -> a))
+                    .collect(Collectors.toMap(name -> name, wrappedRequest::getHeader, (a, b) -> a))
                     .toString();
 
             String requestBody = getBody(wrappedRequest.getContentAsByteArray(), wrappedRequest.getCharacterEncoding());
@@ -46,11 +49,11 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                     wrappedRequest.getMethod(),
                     wrappedRequest.getRequestURI(),
                     headers,
-                    requestBody.isBlank() ? "[empty]" : requestBody );
+                    formatBody(requestBody));
 
             logger.info("RESPONSE: {} Body: {}",
                     wrappedResponse.getStatus(),
-                    responseBody.isBlank() ? "[empty]" : responseBody);
+                    formatBody(responseBody));
 
             wrappedResponse.copyBodyToResponse();
         }
@@ -60,9 +63,19 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
         if (content.length == 0) return "";
         try {
             return new String(content, encoding != null ? encoding : StandardCharsets.UTF_8.name());
-    } catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             logger.warn("Could not decode body", e);
             return "[decode error]";
+        }
+    }
+
+    private String formatBody(String body) {
+        if (body == null || body.isBlank()) return "[empty]";
+        try {
+            Object json = objectMapper.readValue(body, Object.class);
+            return "\n" + objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+        } catch (Exception e) {
+            return body; // not JSON, just return as-is
         }
     }
 }
