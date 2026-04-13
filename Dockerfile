@@ -8,7 +8,7 @@ COPY . .
 RUN ./gradlew bootJar --no-daemon
 
 # --- Stage 2: Slim JVM runtime ---
-FROM eclipse-temurin:21-jre-jammy
+FROM eclipse-temurin:25-jre-jammy
 
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
