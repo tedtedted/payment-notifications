@@ -17,7 +17,7 @@ public class HmacValidator {
                     safe(item.amount() != null ? item.amount().value().toString() : ""),
                     safe(item.amount() != null ? item.amount().currency() : ""),
                     safe(item.eventCode()),
-                    safe(item.success())
+                    safe(String.valueOf(item.success()))
             );
 
             SecretKeySpec signingKey = new SecretKeySpec(Base64.getDecoder().decode(hmacKey), "HmacSHA256");

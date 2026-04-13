@@ -1,6 +1,6 @@
 package com.tedredington.paymentnotifications.adyen;
 
-import com.adyen.model.notification.NotificationRequest;
+import com.tedredington.paymentnotifications.adyen.webhook.NotificationWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,7 @@ public class NotificationController {
     }
 
     @PostMapping("events")
-    public ResponseEntity postNotification(@RequestBody NotificationRequest notification) {
+    public ResponseEntity postNotification(@RequestBody NotificationWrapper notification) {
 
         try {
             notificationService.save(notification);
