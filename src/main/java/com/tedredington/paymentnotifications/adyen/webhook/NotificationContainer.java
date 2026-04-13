@@ -1,4 +1,7 @@
 package com.tedredington.paymentnotifications.adyen.webhook;
 
-public record NotificationContainer(NotificationRequestItem NotificationRequestItem) {}
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public record NotificationContainer(
+        @JsonProperty("NotificationRequestItem") NotificationRequestItem notificationItem
+) {}

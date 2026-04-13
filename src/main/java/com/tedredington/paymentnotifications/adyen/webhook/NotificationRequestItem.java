@@ -1,5 +1,7 @@
 package com.tedredington.paymentnotifications.adyen.webhook;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public record NotificationRequestItem(
@@ -8,8 +10,11 @@ public record NotificationRequestItem(
         String merchantReference,
         String originalReference,
         String pspReference,
-        String success,
+        String reason,
+        boolean success,
         Amount amount,
+        Date eventDate,
+        String paymentMethod,
+        List<String> operations,
         Map<String, String> additionalData
 ) {}
-
