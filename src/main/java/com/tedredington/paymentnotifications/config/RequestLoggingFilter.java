@@ -1,6 +1,6 @@
 package com.tedredington.paymentnotifications.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +30,8 @@ public class RequestLoggingFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request);
+        // Spring Framework 7 requires an explicit cache limit; 0 preserves the previous unbounded behavior.
+        ContentCachingRequestWrapper wrappedRequest = new ContentCachingRequestWrapper(request, 0);
         ContentCachingResponseWrapper wrappedResponse = new ContentCachingResponseWrapper(response);
 
         try {
