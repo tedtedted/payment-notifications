@@ -1,17 +1,16 @@
-# --- Stage 1: Gradle build ---
-FROM gradle:9.4.1-jdk21 AS builder
+# --- Stage 1: GraalVM native build ---
+FROM ghcr.io/graalvm/native-image-community:21 AS builder
 
 WORKDIR /app
 COPY . .
 
-# Build the application using the Gradle wrapper
-RUN ./gradlew bootJar --no-daemon
+RUN ./gradlew nativeCompile --no-daemon -x test
 
-# --- Stage 2: Slim JVM runtime ---
-FROM eclipse-temurin:25-jre-jammy
+# --- Stage 2: Minimal runtime ---
+FROM debian:stable-slim
 
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/native/nativeCompile/payment-notifications /app/payment-notifications
 
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["/app/payment-notifications"]
