@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
+    name: JVM build & test
     runs-on: ubuntu-latest
 
     steps:
@@ -37,4 +38,34 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: test-results
+          path: build/reports/tests/
+
+  native:
+    name: Native build & test
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up GraalVM 21
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm-community'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'gradle'
+
+      - name: Run native tests
+        run: ./gradlew nativeTest
+
+      - name: Native compile (smoke)
+        run: ./gradlew nativeCompile
+
+      - name: Upload native test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: native-test-results
           path: build/reports/tests/
