@@ -1,6 +1,8 @@
 # --- Stage 1: GraalVM native build ---
 FROM ghcr.io/graalvm/native-image-community:21 AS builder
 
+RUN microdnf install -y findutils && microdnf clean all
+
 WORKDIR /app
 COPY . .
 
