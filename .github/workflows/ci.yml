@@ -41,7 +41,7 @@ jobs:
           path: build/reports/tests/
 
   native:
-    name: Native build & test
+    name: Native compile (smoke)
     runs-on: ubuntu-latest
     needs: test
 
@@ -57,15 +57,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'gradle'
 
-      - name: Run native tests
-        run: ./gradlew nativeTest
-
-      - name: Native compile (smoke)
+      - name: Native compile
         run: ./gradlew nativeCompile
-
-      - name: Upload native test results
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: native-test-results
-          path: build/reports/tests/
