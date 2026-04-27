@@ -1,5 +1,5 @@
 # --- Stage 1: GraalVM native build ---
-FROM ghcr.io/graalvm/native-image-community:21 AS builder
+FROM ghcr.io/graalvm/native-image-community:25 AS builder
 
 WORKDIR /app
 COPY . .
