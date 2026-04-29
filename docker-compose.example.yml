@@ -1,0 +1,29 @@
+# Local dev / reference example only.
+# Production compose lives in the infrastructure repo.
+
+services:
+  payment-notifications:
+    image: tedtedted/payment-notifications:latest
+    expose:
+      - "8081"
+    env_file: .env
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:8
+    volumes:
+      - mongo_data:/data/db
+    env_file: .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  mongo_data:
