@@ -1,3 +1,6 @@
+# Local dev / reference example only.
+# Production compose lives in the infrastructure repo.
+
 services:
   payment-notifications:
     image: tedtedted/payment-notifications:latest
