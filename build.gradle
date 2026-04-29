@@ -31,3 +31,22 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootBuildImage {
+	def gitSha = System.getenv("GIT_SHA")
+	builder = "paketobuildpacks/builder-noble-java-tiny:latest"
+	imageName = "tedtedted/payment-notifications:latest"
+	if (gitSha) {
+		tags = ["tedtedted/payment-notifications:${gitSha}"]
+	}
+	environment = [
+		"BP_NATIVE_IMAGE": "true",
+		"BP_JVM_VERSION" : "21"
+	]
+	docker {
+		publishRegistry {
+			username = System.getenv("DOCKER_HUB_USERNAME") ?: ""
+			password = System.getenv("DOCKER_HUB_TOKEN") ?: ""
+		}
+	}
+}
