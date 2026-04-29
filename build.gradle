@@ -41,7 +41,7 @@ bootBuildImage {
 	}
 	environment = [
 		"BP_NATIVE_IMAGE": "true",
-		"BP_JVM_VERSION" : "21"
+		"BP_JVM_VERSION" : "25"
 	]
 	docker {
 		publishRegistry {
